@@ -1,0 +1,77 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{isEditing?"Modifier":"Ajouter"}} un formateur</h3>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="onSubmit()">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="selectedFormateur.nom" name="nom" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Prénom" [(ngModel)]="selectedFormateur.prenom" name="prenom" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="selectedFormateur.email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" placeholder="Téléphone" [(ngModel)]="selectedFormateur.telephone" name="telephone" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Carte d'identité" [(ngModel)]="selectedFormateur.cin" name="cin" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Spécialités</label>
+                            <div *ngFor="let specialite of selectedFormateur.specialites; let i = index" class="input-group mb-2">
+                                <input type="text" class="form-control" [(ngModel)]="selectedFormateur.specialites[i]" [name]="'specialite'+i">
+                                <button type="button" class="btn btn-danger" (click)="removeSpecialite(i)">X</button>
+                            </div>
+                            <button type="button" class="btn btn-secondary btn-sm" (click)="addSpecialite()">
+                                Ajouter une spécialité
+                            </button>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Photo</label>
+                            <input type="file" class="form-control" accept="image/*">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">CV</label>
+                            <input type="file" class="form-control" accept=".pdf">
+                        </div>
+                        <button type="submit" class="btn btn-primary">{{isEditing?"Modifier":"Ajouter"}}</button>
+                        <button type="button" class="btn btn-secondary ms-2" *ngIf="isEditing" (click)="resetForm()">Annuler</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Spécialités</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let formateur of formateurs">
+                        <td>{{formateur.nom}}</td>
+                        <td>{{formateur.prenom}}</td>
+                        <td>{{formateur.email}}</td>
+                        <td>{{formateur.telephone}}</td>
+                        <td>{{formateur.specialites.join(', ')}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning me-2" (click)="editFormateur(formateur)">Modifier</button>
+                            <button class="btn btn-sm btn-danger" (click)="deleteFormateur(formateur.id!)">Supprimer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
