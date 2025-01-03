@@ -1,0 +1,46 @@
+<div class="container mt-4" *ngIf="formation">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>{{formation.titre}}</h2>
+            <p class="lead">{{formation.description}}</p>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5>Détails de la formation</h5>
+                        <p><strong>Charge horaire:</strong> {{formation.chargeHoraire}} heures</p>
+                        <p><strong>Niveau:</strong> {{formation.niveau}}</p>
+                        <div class="tags mb-2">
+                            <span *ngFor="let tag of formation.tags" class="badge bg-secondary me-1">{{tag}}</span>
+                        </div>
+                        <button class="btn btn-primary" (click)="window.open(formation.programme)">Voir le programme</button>
+                </div>
+            </div>
+            <h3>Sessions à venir</h3>
+            <div *ngFor="let session of sessions" class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Session du {{session.dateDebut | date}} au {{session.dateFin | date}}</h5>
+                    <p>Formateurs:
+                        <span *ngFor="let formateur of session.formateurs; let last = last">{{formateur.nom}} {{formateur.prenom}}{{!last ? ', ' : ''}}</span>
+                    </p>
+                    <p>Places restantes: {{15 - session.candidats.length}}</p>
+                    <button class="btn btn-success" [disabled]="session.candidats.length>=15" (click)="selectedSessionId==session.id">
+                        S'inscrire
+                    </button>
+                </div>
+                <div class="card-footer" *ngIf="selectedSessionId===session.id">
+                    <form (ngSubmit)="inscrireCandidat(session.id!)">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="newCandidat.nom" name="nom" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Prénom" [(ngModel)]="newCandidat.prenom" name="prenom" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="newCandidat.email" name="email" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Confirmer l'inscription</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

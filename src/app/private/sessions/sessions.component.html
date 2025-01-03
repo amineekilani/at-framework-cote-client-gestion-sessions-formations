@@ -1,0 +1,93 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>{{isEditing ? 'Modifier' : 'Ajouter'}} une session</h3>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label class="form-label">Formation</label>
+                <select class="form-control" [(ngModel)]="selectedSession.formation" name="formation" required>
+                  <option [ngValue]="null">Sélectionner une formation</option>
+                  <option *ngFor="let formation of formations" [ngValue]="formation">
+                    {{formation.titre}}
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Formateurs (max 2)</label>
+                <select multiple class="form-control" [(ngModel)]="selectedFormateurIds" 
+                        name="formateurs" [disabled]="selectedFormateurIds.length >= 2">
+                  <option *ngFor="let formateur of formateurs" [value]="formateur.id">
+                    {{formateur.nom}} {{formateur.prenom}}
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Date de début</label>
+                <input type="date" class="form-control"
+                       [(ngModel)]="selectedSession.dateDebut" name="dateDebut" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Date de fin</label>
+                <input type="date" class="form-control"
+                       [(ngModel)]="selectedSession.dateFin" name="dateFin" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" rows="3"
+                          [(ngModel)]="selectedSession.description" name="description" required>
+                </textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" 
+                      [disabled]="!selectedSession.formation || selectedFormateurIds.length === 0">
+                {{isEditing ? 'Modifier' : 'Ajouter'}}
+              </button>
+              <button type="button" class="btn btn-secondary ms-2" *ngIf="isEditing"
+                      (click)="resetForm()">
+                Annuler
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-8">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Formation</th>
+              <th>Formateurs</th>
+              <th>Date début</th>
+              <th>Date fin</th>
+              <th>Inscrits</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let session of sessions">
+              <td>{{session.formation.titre}}</td>
+              <td>
+                <div *ngFor="let formateur of session.formateurs">
+                  {{formateur.nom}} {{formateur.prenom}}
+                </div>
+              </td>
+              <td>{{session.dateDebut | date}}</td>
+              <td>{{session.dateFin | date}}</td>
+              <td>{{session.candidats.length}}/15</td>
+              <td>
+                <button class="btn btn-sm btn-warning me-2" (click)="editSession(session)">
+                  Modifier
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="deleteSession(session.id!)">
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
