@@ -1,0 +1,53 @@
+<h2>Editer le candidat {{ candidat!.nom }} {{ candidat!.prenom }} :</h2>
+<form id="editForm" (ngSubmit)="editCandidat()" #f="ngForm">
+    <div class="mb-3">
+        <label for="nom" class="form-label">Nom*</label>
+        <input type="text" class="form-control" id="nom" name="nom" ngModel #nom="ngModel" [(ngModel)]="candidat!.nom" required />
+        @if (nom.invalid && nom.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="prenom" class="form-label">Prénom*</label>
+        <input type="text" class="form-control" id="prenom" name="prenom" ngModel #prenom="ngModel" [(ngModel)]="candidat!.prenom" required />
+        @if (prenom.invalid && prenom.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email*</label>
+        <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel" [(ngModel)]="candidat!.email" required />
+        @if (email.invalid && email.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="numeroCarteIdentite" class="form-label">Numéro de Carte d'Identité*</label>
+        <input type="text" class="form-control" id="numeroCarteIdentite" name="numeroCarteIdentite" ngModel #numeroCarteIdentite="ngModel" [(ngModel)]="candidat!.numeroCarteIdentite" required />
+        @if (numeroCarteIdentite.invalid && numeroCarteIdentite.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="photo" class="form-label">Photo*</label>
+        <input type="file" class="form-control" id="photo" name="photo" ngModel #photo="ngModel" [(ngModel)]="candidat!.photo" required />
+        @if (photo.invalid && photo.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="motDePasse" class="form-label">Mot de Passe*</label>
+        <input type="password" class="form-control" id="motDePasse" name="motDePasse" ngModel #motDePasse="ngModel" [(ngModel)]="candidat!.motDePasse" required />
+        @if (motDePasse.invalid && motDePasse.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <button 
+        type="submit" 
+        id="btnValidEdit" 
+        class="btn btn-primary"
+        [disabled]="f.invalid">
+            Valider
+    </button>
+    <div>* : champ obligatoire</div>
+</form>

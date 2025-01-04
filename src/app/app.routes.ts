@@ -1,20 +1,18 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
+import { AdminSpaceModule } from './admin-space/admin-space.module';
 
-const routes: Routes = [
-  { path: '', redirectTo: 'public', pathMatch: 'full' },
-  { 
-    path: 'public', 
-    loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
-  },
-  {
-    path: 'admin-space',
-    loadChildren: () => import('./private/private.module').then(m => m.PrivateModule)
-  }
+export const routes: Routes = [
+    {
+        path: 'admin-space',
+        loadChildren: () => import('./admin-space/admin-space.module').then(m=> m.AdminSpaceModule)
+    },
+    {
+        path: 'public',
+        loadChildren: () => import('./public/public.module').then(m=> m.PublicModule)
+    },
+    {
+        path: '',
+        redirectTo: '/public',
+        pathMatch: 'full'
+    }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {}

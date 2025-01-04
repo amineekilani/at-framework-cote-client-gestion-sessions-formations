@@ -1,0 +1,51 @@
+<a routerLink="/admin-space/formations/add" class="btn btn-info">
+    Ajouter une formation
+</a>
+<table class="table table-striped">
+    <thead>
+        <tr class="dark">
+            <th scope="col">#</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Description</th>
+            <th scope="col">Charge Horaire</th>
+            <th scope="col">Programme</th>
+            <th scope="col">Niveau de Difficulté</th>
+            <th scope="col">Mots Clés</th>
+            <th scope="col">Catégories</th>
+            <th scope="col">Editer</th>
+            <th scope="col">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(formation of formations; track $index)
+        {
+            <tr>
+                <th scope="row">{{ formation.id }}</th>
+                <td>{{ formation.titre }}</td>
+                <td>{{ formation.description }}</td>
+                <td>{{ formation.chargeHoraire }}</td>
+                <td>{{ formation.programme }}</td>
+                <td>{{ formation.niveauDifficulte }}</td>
+                <td>
+                @for(motCle of formation.motsCles; track $index)
+                {
+                    {{ motCle }}<br>
+                }
+            </td>
+            <td>
+                @for(categorie of formation.categories; track $index){
+                    {{ categorie }}<br>
+                }
+            </td>
+            <td>
+                <a class="btn btn-success" [routerLink]="['/admin-space', 'formations', 'edit', formation.id]">
+                    Editer
+                </a>
+            </td>
+            <td>
+                <button class="btn btn-danger" (click)="deleteFormation(formation.id)">Supprimer</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

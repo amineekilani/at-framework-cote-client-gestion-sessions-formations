@@ -1,0 +1,43 @@
+<a routerLink="/admin-space/formateurs/add" class="btn btn-info">
+    Ajouter un formateur
+</a>
+<table class="table table-striped">
+    <thead>
+        <tr class="dark">
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Numéro de Téléphone</th>
+            <th scope="col">Numéro de Carte d'Identité</th>
+            <th scope="col">Photo</th>
+            <th scope="col">CV</th>
+            <th scope="col">Spécialités</th>
+            <th scope="col">Editer</th>
+            <th scope="col">Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(formateur of formateurs;track $index){
+        <tr>
+            <th scope="row">{{ formateur.id }}</th>
+            <td>{{ formateur.nom }}</td>
+            <td>{{ formateur.prenom }}</td>
+            <td>{{ formateur.email }}</td>
+            <td>{{ formateur.telephone }}</td>
+            <td>{{ formateur.numeroCarteIdentite }}</td>
+            <td><img [src]="formateur.photo" alt="photo de {{formateur.nom}}" width="50"></td>
+            <td><a [href]="formateur.cv" target="_blank">Voir CV</a></td>
+            <td>
+                <ul>
+                    @for(s of formateur.specialites;track $index){
+                        <li>{{ s }}</li>
+                    }
+                </ul>
+            </td>
+            <td><a class="btn btn-success" [routerLink]="['/admin-space', 'formateurs', 'edit', formateur.id]">Editer</a></td>
+            <td><button class="btn btn-danger" (click)="deleteFormateur(formateur.id)">Supprimer</button></td>
+        </tr>
+    }
+    </tbody>
+</table>

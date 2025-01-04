@@ -1,0 +1,50 @@
+<h2>Ajout d'un nouveau candidat :</h2>
+<form id="addForm" (ngSubmit)="addCandidat(f)" #f="ngForm">
+    <div class="mb-3">
+        <label for="nom" class="form-label">Nom*</label>
+        <input type="text" class="form-control" name="nom" #nom="ngModel" ngModel required />
+        @if (nom.invalid && nom.touched) {
+            <span class="error">Ce champ est obligatoire</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="prenom" class="form-label">Prénom*</label>
+        <input type="text" class="form-control" name="prenom" #prenom="ngModel" ngModel required />
+        @if (prenom.invalid && prenom.touched) {
+            <span class="error">Ce champ est obligatoire</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email*</label>
+        <input type="email" class="form-control" name="email" #email="ngModel" ngModel required email />
+        @if (email.invalid && email.touched) {
+            <span class="error">Veuillez entrer une adresse email valide</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="numeroCarteIdentite" class="form-label">Numéro de Carte d'Identité*</label>
+        <input type="text" class="form-control" name="numeroCarteIdentite" #numeroCarteIdentite="ngModel" ngModel required />
+        @if (numeroCarteIdentite.invalid && numeroCarteIdentite.touched) {
+            <span class="error">Ce champ est obligatoire</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="photo" class="form-label">Photo (URL)*</label>
+        <input type="file" class="form-control" name="photo" #photo="ngModel" ngModel required />
+        @if (photo.invalid && photo.touched) {
+            <span class="error">Ce champ est obligatoire</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="motDePasse" class="form-label">Mot de Passe*</label>
+        <input type="password" class="form-control" name="motDePasse" #motDePasse="ngModel" ngModel required />
+        @if (motDePasse.invalid && motDePasse.touched) {
+            <span class="error">Ce champ est obligatoire</span>
+        }
+    </div>
+    <button type="submit" name="btnValidAdd"
+        class="btn btn-warning" [disabled]="f.invalid">
+        Valider
+    </button>
+    <div>*: Champs obligatoires</div>
+</form>

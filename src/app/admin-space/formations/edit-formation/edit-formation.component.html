@@ -1,0 +1,60 @@
+<h2>Modifier la formation {{ formation!.titre }} :</h2>
+<form id="editForm" (ngSubmit)="editFormation()" #f="ngForm">
+    <div class="mb-3">
+        <label for="titre" class="form-label">Titre*</label>
+        <input type="text" class="form-control" id="titre" name="titre" ngModel #titre="ngModel" [(ngModel)]="formation!.titre" required />
+        @if (titre.invalid && titre.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description*</label>
+        <textarea class="form-control" id="description" name="description" ngModel #description="ngModel" [(ngModel)]="formation!.description" required></textarea>
+        @if (description.invalid && description.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="chargeHoraire" class="form-label">Charge Horaire*</label>
+        <input type="number" class="form-control" id="chargeHoraire" name="chargeHoraire" ngModel #chargeHoraire="ngModel" [(ngModel)]="formation!.chargeHoraire" required />
+        @if (chargeHoraire.invalid && chargeHoraire.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="programme" class="form-label">Programme*</label>
+        <textarea class="form-control" id="programme" name="programme" ngModel #programme="ngModel" [(ngModel)]="formation!.programme" required></textarea>
+        @if (programme.invalid && programme.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="niveauDifficulte" class="form-label">Niveau de Difficulté*</label>
+        <input type="text" class="form-control" id="niveauDifficulte" name="niveauDifficulte" ngModel #niveauDifficulte="ngModel" [(ngModel)]="formation!.niveauDifficulte" required />
+        @if (niveauDifficulte.invalid && niveauDifficulte.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="motsCles" class="form-label">Mots Clés*</label>
+        <input type="text" class="form-control" id="motsCles" name="motsCles" ngModel #motsCles="ngModel" [(ngModel)]="formation!.motsCles" required />
+        @if (motsCles.invalid && motsCles.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="categories" class="form-label">Catégories*</label>
+        <input type="text" class="form-control" id="categories" name="categories" ngModel #categories="ngModel" [(ngModel)]="formation!.categories" required />
+        @if (categories.invalid && categories.touched) {
+            <span class="error">Ce champ est obligatoire!</span>
+        }
+    </div>
+    <button 
+        type="submit" 
+        id="btnValidEdit" 
+        class="btn btn-primary"
+        [disabled]="f.invalid">
+            Valider
+    </button>
+    <div>* : champ obligatoire</div>
+</form>

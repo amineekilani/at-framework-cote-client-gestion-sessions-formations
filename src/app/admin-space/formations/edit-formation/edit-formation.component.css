@@ -1,0 +1,68 @@
+input.ng-invalid.ng-touched{
+    border: 1px red solid;
+}
+.error{
+    color:red;
+    font-size: small;
+}
+form {
+    background-color: #f8f9fa; /* Fond clair */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  }
+  
+  h2 {
+    color: #343a40;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    color: #495057;
+  }
+  
+  input.form-control, textarea.form-control {
+    border-radius: 6px; /* Coins arrondis */
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s;
+  }
+  
+  input.form-control:focus, textarea.form-control:focus {
+    border-color: #007bff; /* Changer la couleur de la bordure au focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ombre au focus */
+  }
+  
+  .error {
+    color: #dc3545; /* Rouge pour l'erreur */
+    font-size: 0.875rem;
+    margin-top: 5px;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Couleur du bouton */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3; /* Couleur au survol */
+  }
+  
+  button[type="submit"]:disabled {
+    background-color: #6c757d; /* Couleur lorsque le bouton est désactivé */
+  }
+  
+  div {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-top: 10px;
+  }
+  
